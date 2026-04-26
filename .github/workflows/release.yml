@@ -2,6 +2,11 @@ name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version (example: 1.0.2)"
+        required: true
+        type: string
   push:
     tags:
       - "v*"
@@ -39,20 +44,24 @@ jobs:
         run: |
           set -euo pipefail
 
-          PKG_VERSION="$(node -p "require('./package.json').version")"
-          PKG_TAG="v${PKG_VERSION}"
-
           if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
             RELEASE_TAG="${GITHUB_REF_NAME}"
-            if [[ "${RELEASE_TAG}" != "${PKG_TAG}" ]]; then
-              echo "Tag (${RELEASE_TAG}) does not match package.json version (${PKG_TAG})."
-              exit 1
-            fi
+            RELEASE_VERSION="${RELEASE_TAG#v}"
           else
-            RELEASE_TAG="${PKG_TAG}"
+            RELEASE_VERSION="${{ github.event.inputs.version }}"
+            RELEASE_TAG="v${RELEASE_VERSION}"
           fi
 
-          echo "new_version=${PKG_VERSION}" >> "$GITHUB_OUTPUT"
+          if [[ ! "${RELEASE_VERSION}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Invalid release version: ${RELEASE_VERSION}"
+            exit 1
+          fi
+
+          # Keep extension/manifest version in sync for this build without
+          # requiring a commit back to main.
+          npm pkg set version="${RELEASE_VERSION}"
+
+          echo "new_version=${RELEASE_VERSION}" >> "$GITHUB_OUTPUT"
           echo "new_tag=${RELEASE_TAG}" >> "$GITHUB_OUTPUT"
 
       - name: Validate types
