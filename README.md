@@ -1,3 +1,3 @@
-# WXT + React
+# Metavision
 
-This template should help get you started developing with React in WXT.
+Chrome extension for real-time Open Graph and Twitter metadata previews on local development URLs.

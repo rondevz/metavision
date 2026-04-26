@@ -2,6 +2,8 @@ export default defineContentScript({
   // Run on all pages so developers can inspect localhost and local dev servers
   matches: ['<all_urls>'],
   main() {
+    const chromeApi = (globalThis as any).chrome;
+
     // Lightweight metadata extractor for title and meta tags
     const extractMetadata = () => {
       const tags: Record<string, string> = {};
@@ -34,9 +36,10 @@ export default defineContentScript({
     let lastTags = extractMetadata();
 
     const sendTags = (tags: Record<string, string>) => {
+      if (!chromeApi?.runtime) return;
       try {
         // fire-and-forget message to any extension page (side panel will listen)
-        chrome.runtime.sendMessage({ action: 'METADATA_UPDATED', payload: tags });
+        chromeApi.runtime.sendMessage({ action: 'METADATA_UPDATED', payload: tags });
       } catch (e) {
         // chrome may be undefined in some envs - ignore
       }
@@ -47,7 +50,8 @@ export default defineContentScript({
 
     // Respond to explicit requests from the side panel for the current metadata
     try {
-      chrome.runtime.onMessage.addListener((message: any, sender: any, sendResponse: any) => {
+      if (!chromeApi?.runtime) return;
+      chromeApi.runtime.onMessage.addListener((message: any, sender: any, sendResponse: any) => {
         if (!message || !message.action) return;
         if (message.action === 'REQUEST_METADATA') {
           sendResponse({ payload: lastTags });
