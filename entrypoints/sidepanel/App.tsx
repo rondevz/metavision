@@ -140,7 +140,7 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_20%_0%,#0f2744_0%,#040a14_58%)] p-3 text-[#dbeaff]">
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(46,218,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(46,218,255,0.06)_1px,transparent_1px)] bg-[size:22px_22px] [mask-image:linear-gradient(180deg,rgba(0,0,0,0.45),rgba(0,0,0,0))]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(245,243,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(245,243,255,0.06)_1px,transparent_1px)] bg-[size:22px_22px] [mask-image:linear-gradient(180deg,rgba(0,0,0,0.45),rgba(0,0,0,0))]" />
 
       <header className="relative z-10 mb-3 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div>
