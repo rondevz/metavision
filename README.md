@@ -1,5 +1,9 @@
 # Metavision
 
+<p align="center">
+  <img src="assets/hero.png" alt="Metavision" width="720" />
+</p>
+
 Metavision is an open-source browser extension that lets you preview social metadata (Open Graph + X/Twitter cards) directly from local development URLs like `http://localhost:3000`.
 
 No deploy needed. Edit your `<head>`, save, and see updates live.

@@ -22,7 +22,7 @@ function renderJsonWithHighlight(rawJson: string) {
     let className = 'text-[#b7d6f8]';
 
     if (keyToken) {
-      className = 'text-cyan-300';
+      className = 'text-purple-300';
     } else if (stringToken) {
       className = 'text-emerald-300';
     } else if (boolOrNullToken) {
@@ -153,38 +153,38 @@ export default function App() {
               ? 'border-emerald-300/35 bg-emerald-300/10 text-emerald-300'
               : status === 'waiting'
                 ? 'border-amber-300/35 bg-amber-300/10 text-amber-200'
-                : 'border-cyan-300/35 bg-cyan-300/10 text-cyan-200'
+                : 'border-purple-300/35 bg-purple-300/10 text-purple-200'
           }`}
         >
           {statusLabel}
         </span>
       </header>
 
-      <section className="relative z-10 mb-3 grid gap-3 rounded-2xl border border-cyan-300/25 bg-[linear-gradient(160deg,rgba(20,36,60,.9),rgba(11,20,36,.88))] p-3 shadow-[0_0_0_1px_rgba(61,216,255,.08),0_16px_36px_rgba(2,8,23,.45)] sm:grid-cols-[160px_minmax(0,1fr)]">
+      <section className="relative z-10 mb-3 grid gap-3 rounded-2xl border border-purple-300/25 bg-[linear-gradient(160deg,rgba(20,36,60,.9),rgba(11,20,36,.88))] p-3 shadow-[0_0_0_1px_rgba(61,216,255,.08),0_16px_36px_rgba(2,8,23,.45)] sm:grid-cols-[160px_minmax(0,1fr)]">
         {image ? (
           <div
-            className="aspect-[16/10] w-full rounded-xl border border-cyan-200/30 bg-cover bg-center"
+            className="aspect-[16/10] w-full rounded-xl border border-purple-200/30 bg-cover bg-center"
             style={{ backgroundImage: `url(${image})` }}
           />
         ) : (
-          <div className="flex aspect-[16/10] w-full items-center justify-center rounded-xl border border-cyan-200/30 bg-[#0a1527] text-xs text-[#7f9fbe]">
+          <div className="flex aspect-[16/10] w-full items-center justify-center rounded-xl border border-purple-200/30 bg-[#0a1527] text-xs text-[#7f9fbe]">
             No image
           </div>
         )}
 
         <div className="min-w-0">
-          <p className="mb-1 text-[10px] uppercase tracking-[0.2em] text-cyan-300">Social Preview</p>
+          <p className="mb-1 text-[10px] uppercase tracking-[0.2em] text-purple-300">Social Preview</p>
           <h3 className="m-0 text-[1.08rem] leading-tight break-words">{title || 'No title found'}</h3>
           <p className="mt-2 text-[0.86rem] leading-relaxed break-words text-[#a9c2dc]">
             {description || 'No description found'}
           </p>
-          <p className="mt-3 text-xs break-words text-cyan-300">{canonical || 'No canonical URL found'}</p>
+          <p className="mt-3 text-xs break-words text-purple-300">{canonical || 'No canonical URL found'}</p>
         </div>
       </section>
 
-      <section className="relative z-10 mb-3 grid gap-3 rounded-2xl border border-cyan-300/25 bg-[linear-gradient(160deg,rgba(20,36,60,.9),rgba(11,20,36,.88))] p-3 shadow-[0_0_0_1px_rgba(61,216,255,.08),0_16px_36px_rgba(2,8,23,.45)] lg:grid-cols-2">
+      <section className="relative z-10 mb-3 grid gap-3 rounded-2xl border border-purple-300/25 bg-[linear-gradient(160deg,rgba(20,36,60,.9),rgba(11,20,36,.88))] p-3 shadow-[0_0_0_1px_rgba(61,216,255,.08),0_16px_36px_rgba(2,8,23,.45)] lg:grid-cols-2">
         <div className="min-w-0">
-          <h4 className="mb-2 text-xs uppercase tracking-[0.14em] text-cyan-300">Open Graph</h4>
+          <h4 className="mb-2 text-xs uppercase tracking-[0.14em] text-purple-300">Open Graph</h4>
           <ul className="m-0 grid list-none gap-2 p-0">
             <MetaRow label="title" value={tags['og:title'] || '-'} />
             <MetaRow label="description" value={tags['og:description'] || '-'} />
@@ -193,7 +193,7 @@ export default function App() {
           </ul>
         </div>
         <div className="min-w-0">
-          <h4 className="mb-2 text-xs uppercase tracking-[0.14em] text-cyan-300">X (twitter:*)</h4>
+          <h4 className="mb-2 text-xs uppercase tracking-[0.14em] text-purple-300">X (twitter:*)</h4>
           <ul className="m-0 grid list-none gap-2 p-0">
             <MetaRow label="card" value={tags['twitter:card'] || '-'} />
             <MetaRow label="title" value={tags['twitter:title'] || '-'} />
@@ -203,13 +203,13 @@ export default function App() {
         </div>
       </section>
 
-      <section className="relative z-10 rounded-2xl border border-cyan-300/25 bg-[linear-gradient(160deg,rgba(20,36,60,.9),rgba(11,20,36,.88))] p-3 shadow-[0_0_0_1px_rgba(61,216,255,.08),0_16px_36px_rgba(2,8,23,.45)]">
+      <section className="relative z-10 rounded-2xl border border-purple-300/25 bg-[linear-gradient(160deg,rgba(20,36,60,.9),rgba(11,20,36,.88))] p-3 shadow-[0_0_0_1px_rgba(61,216,255,.08),0_16px_36px_rgba(2,8,23,.45)]">
         <div className="mb-2 flex items-center justify-between gap-2">
-          <h4 className="m-0 text-xs uppercase tracking-[0.14em] text-cyan-300">Raw Tags</h4>
+          <h4 className="m-0 text-xs uppercase tracking-[0.14em] text-purple-300">Raw Tags</h4>
           <button
             type="button"
             onClick={copyRawTags}
-            className="inline-flex items-center gap-1 rounded-md border border-cyan-300/30 bg-cyan-300/10 px-2 py-1 text-[11px] text-cyan-200 transition hover:bg-cyan-300/20"
+            className="inline-flex items-center gap-1 rounded-md border border-purple-300/30 bg-purple-300/10 px-2 py-1 text-[11px] text-purple-200 transition hover:bg-purple-300/20"
             aria-label="Copy raw tags"
             title="Copy raw tags"
           >
@@ -219,7 +219,7 @@ export default function App() {
             {copied ? 'Copied' : 'Copy'}
           </button>
         </div>
-        <pre className="m-0 max-h-72 overflow-auto rounded-xl border border-cyan-200/15 bg-[#071226]/80 p-3 text-[11px] leading-[1.45]">
+        <pre className="m-0 max-h-72 overflow-auto rounded-xl border border-purple-200/15 bg-[#071226]/80 p-3 text-[11px] leading-[1.45]">
           <code>{highlightedRawTags}</code>
         </pre>
       </section>
