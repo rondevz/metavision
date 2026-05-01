@@ -61,6 +61,7 @@ function MetaRow({ label, value }: { label: string; value: string }) {
 
 export default function App() {
   const [tags, setTags] = useState<Tags>(empty);
+  const [imagePreviewDataUrl, setImagePreviewDataUrl] = useState('');
   const [status, setStatus] = useState('waiting');
   const [copied, setCopied] = useState(false);
 
@@ -76,6 +77,7 @@ export default function App() {
     const onRuntimeMessage = (message: any) => {
       if (message?.action === 'METADATA_UPDATED') {
         setTags(message.payload || {});
+        setImagePreviewDataUrl(typeof message.imageDataUrl === 'string' ? message.imageDataUrl : '');
         setStatus('updated');
       }
     };
@@ -95,6 +97,7 @@ export default function App() {
         chromeApi.tabs.sendMessage(tab.id, { action: 'REQUEST_METADATA' }, (response: any) => {
           if (response && response.payload) {
             setTags(response.payload || {});
+            setImagePreviewDataUrl(typeof response.imageDataUrl === 'string' ? response.imageDataUrl : '');
             setStatus('loaded');
           }
         });
@@ -114,7 +117,7 @@ export default function App() {
 
   const title = tags.title || tags['og:title'] || tags['twitter:title'] || '';
   const description = tags.description || tags['og:description'] || tags['twitter:description'] || '';
-  const image = tags['og:image'] || tags['twitter:image'] || '';
+  const image = imagePreviewDataUrl || tags['og:image'] || tags['twitter:image'] || '';
   const canonical = tags['og:url'] || tags['twitter:url'] || '';
   const rawTags = JSON.stringify(tags, null, 2);
   const highlightedRawTags = renderJsonWithHighlight(rawTags);
